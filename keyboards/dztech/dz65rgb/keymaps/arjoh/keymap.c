@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 
-// <TapDance>
+/* TapDance */
 enum {
     TD_GRV_ESC
 };
@@ -9,25 +9,26 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Grave, twice for Esc Lock
     [TD_GRV_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_ESC),
 };
-// </TapDance>
 
+/* "Active" colors */
+const uint8_t ACTIVE_COLOR[3] = {0x80, 0x00, 0x80};
 
-// Config
-const uint8_t MAIN_COLOR[3] = {0x80, 0x00, 0x80};
-
-// layers, ordering is important!
+/* layers, ordering is important */
 enum layers {
     _MAIN,
     _MACOS,
     _CONTROL,
 }
 
+/* Which LEDs should be active for which layer?
+*/
 const layers_leds_map[] = {
-    [_MAIN] = 59,
-    [_MACOS] = 60,
-    [_CONTROL] = 63,
+    [_MAIN] = 59,  /* Location of the GUI key in the _MAIN layer */
+    [_MACOS] = 60, /* Location of the GUI key in the _MACOS layer */
+    [_CONTROL] = 63, /* Location of the key that enables the _CONTROL layer */
 };
 
+/* The actual keymaps */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MAIN] = LAYOUT_65_ansi(
         TD(TD_GRV_ESC), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_HOME,
@@ -53,13 +54,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-
 void rgb_matrix_indicators_user(void) {
 
+    /* Set CAPS led */
     if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(30, MAIN_COLOR[0], MAIN_COLOR[1], MAIN_COLOR[2]);
+        rgb_matrix_set_color(30, ACTIVE_COLOR[0], ACTIVE_COLOR[1], ACTIVE_COLOR[2]);
     }
 
-    // Show Selected Layer
-    rgb_matrix_set_color(layers_leds_map[biton32(layer_state)], MAIN_COLOR[0], MAIN_COLOR[1], MAIN_COLOR[2]);
+    /* Show "Active" layer. */
+    rgb_matrix_set_color(layers_leds_map[biton32(layer_state)], ACTIVE_COLOR[0], ACTIVE_COLOR[1], ACTIVE_COLOR[2]);
 }
