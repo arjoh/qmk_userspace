@@ -73,36 +73,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+void rgb_matrix_set_keys_color(uint8_t keys[], uint8_t size, uint8_t red, uint8_t green, uint8_t blue) {
+
+    for (int i = 0; i < size; i++)
+    {
+        rgb_matrix_set_color(keys[i], red, green, blue);
+    }
+
+}
+
 void rgb_matrix_indicators_user(void) {
 
     if (!g_suspend_state) {
+
+        uint8_t wasd[4] = {17, 31, 32, 33};
+
         switch(biton32(layer_state)) {
             case _WASD:
                 rgb_matrix_set_color_all(0x00, 0x00, 0x00);
 
                 // W A S D
-                rgb_matrix_set_color(17, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(31, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(32, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(33, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
+                rgb_matrix_set_keys_color(wasd, 4, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
 
                 break;
 
             case _DESTINY2:
-
                 rgb_matrix_set_color_all(0x00, 0x00, 0x00);
 
                 // W A S D
-                rgb_matrix_set_color(17, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(31, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(32, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(33, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
+                rgb_matrix_set_keys_color(wasd, 4, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
 
                 // UP LEFT DOWN RIGHT
-                rgb_matrix_set_color(56, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(65, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(66, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
-                rgb_matrix_set_color(67, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
+                uint8_t arrows[4] = {56, 65, 66, 67};
+                rgb_matrix_set_keys_color(arrows, 4, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
 
                 break;
         }
