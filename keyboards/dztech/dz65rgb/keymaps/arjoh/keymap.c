@@ -20,7 +20,7 @@ enum layers {
     _MAIN,
     _MACOS,
     _CONTROL,
-    _WASD,
+    _GAME,
     _DESTINY2
 }
 
@@ -30,7 +30,7 @@ const layers_leds_map[] = {
     [_MAIN] = 59,  /* Location of the GUI key in the _MAIN layer */
     [_MACOS] = 60, /* Location of the GUI key in the _MACOS layer */
     [_CONTROL] = 63, /* Location of the key that enables the _CONTROL layer */
-    [_WASD] = 14, /* Location of the key that enables the _WASD layer */
+    [_GAME] = 14, /* Location of the key that enables the _GAME layer */
     [_DESTINY2] = 29
 };
 
@@ -57,10 +57,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT         , _______, _______, _______, _______, _______, NK_TOGG, TG(1)  , _______, _______, _______, _______, KC_VOLU, KC_MUTE,
         _______, _______, _______,                            _______,                   _______, _______, KC_MPLY, KC_MPRV, KC_VOLD, KC_MNXT
     ),
-    [_WASD] = LAYOUT_65_ansi(
+    [_GAME] = LAYOUT_65_ansi(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
+        MO(2)  , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
         _______         , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, KC_LGUI, KC_LALT,                            _______                  , _______, _______, _______, _______, _______, _______
     ),
@@ -90,7 +90,7 @@ void rgb_matrix_indicators_user(void) {
         uint8_t arrows[4] = {56, 65, 66, 67};
 
         switch(biton32(layer_state)) {
-            case _WASD:
+            case _GAME:
                 rgb_matrix_set_color_all(0x00, 0x00, 0x00);
 
                 // W A S D
