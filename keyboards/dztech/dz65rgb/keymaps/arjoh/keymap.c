@@ -87,6 +87,7 @@ void rgb_matrix_indicators_user(void) {
     if (!g_suspend_state) {
 
         uint8_t wasd[4] = {17, 31, 32, 33};
+        uint8_t arrows[4] = {56, 65, 66, 67};
 
         switch(biton32(layer_state)) {
             case _WASD:
@@ -98,14 +99,25 @@ void rgb_matrix_indicators_user(void) {
                 break;
 
             case _DESTINY2:
-                rgb_matrix_set_color_all(0x00, 0x00, 0x00);
+                rgb_matrix_set_color_all(0x00, 0x00, 0xFF);
 
                 // W A S D
                 rgb_matrix_set_keys_color(wasd, 4, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
 
                 // UP LEFT DOWN RIGHT
-                uint8_t arrows[4] = {56, 65, 66, 67};
                 rgb_matrix_set_keys_color(arrows, 4, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
+
+                // Destiny keys
+                // According to: https://www.yekbot.com/destiny-2-pc-keyboard-controls/
+                uint8_t destiny2[22] = {
+                    00, 01, 02, 03                  // ~ ESC 1 2 3
+                ,   15, 16, 18, 19, 20, 22, 23, 24  // TAB Q E R T U I O
+                ,   34, 35, 39                      // F G L
+                ,   44, 46, 47, 48, 51              // LSHIFT X C V M
+                ,   58, 61                          // LCTRL SPACE
+                };
+
+                rgb_matrix_set_keys_color(destiny2, 22, GAME_COLOR[0], GAME_COLOR[1], GAME_COLOR[2]);
 
                 break;
         }
