@@ -1,5 +1,5 @@
 #define TAPPING_TERM 250
-#define RETRO_TAPPING
+
 
 #ifdef RGB_MATRIX_ENABLE
 /* Disable all effects */
